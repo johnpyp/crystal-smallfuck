@@ -34,10 +34,6 @@ def interp(code : String, tape : Array(Int32), pointer : Int32, idx : Int32)
     return interp(code, flip(tape, pointer), pointer, idx + 1)
   when '['
     if tape[pointer] == 0
-      left_bracket_indices = [] of Int32
-      code.each_char_with_index do |char, i|
-        left_bracket_indices << i if char == "["
-      end
       left_bracket_indices = get_indices(code, "[").select(idx + 1..)
       right_bracket_indices = get_indices(code, "]").select(idx..)
       count_from_back = right_bracket_indices.size - left_bracket_indices.size
@@ -48,10 +44,6 @@ def interp(code : String, tape : Array(Int32), pointer : Int32, idx : Int32)
       return interp(code, tape, pointer, idx + 1)
     end
   when ']'
-    left_bracket_indices = [] of Int32
-    code.each_char_with_index do |char, i|
-      left_bracket_indices << i if char == "["
-    end
     left_bracket_indices = get_indices(code, "[").select(..idx)
     right_bracket_indices = get_indices(code, "]").select(...idx)
     count_from_front = left_bracket_indices.size - right_bracket_indices.size
