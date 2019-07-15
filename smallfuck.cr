@@ -1,8 +1,9 @@
 require "spec"
 
 def flip(tape : Array(Int32), pointer : Int32)
-  tape[pointer] = tape[pointer] == 0 ? 1 : 0
-  tape
+  new_tape = tape.clone
+  new_tape[pointer] = new_tape[pointer] == 0 ? 1 : 0
+  new_tape
 end
 
 def get_indices(str : String, sub : String)
